@@ -1,0 +1,42 @@
+---
+import { Mail, MapPin, Phone } from '@lucide/astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell footer-main">
+    <div class="footer-brand">
+      <img src="/assets/logo-cream.svg" width="142" height="56" alt="Prádelna Jarní" />
+      <p>Profesionální prádelenský servis<br />pro Brno a okolí.</p>
+    </div>
+    <div class="footer-column">
+      <p class="footer-label">Navigace</p>
+      <a href="/sluzby">Služby</a>
+      <a href="/#jak-to-funguje">Jak to funguje</a>
+      <a href="/cenik">Ceník</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/kontakt">Kontakt</a>
+    </div>
+    <div class="footer-column">
+      <p class="footer-label">Informace</p>
+      <a class="footer-contact-link" href="tel:+420702000109"><Phone class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" />+420 702 000 109</a>
+      <a class="footer-contact-link" href="mailto:info@pradelnajarni.cz"><Mail class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" />info@pradelnajarni.cz</a>
+      <a class="footer-contact-link" href="https://maps.google.com/?q=Valchařská+24%2F36+Brno" target="_blank" rel="noreferrer"><MapPin class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" /><span>Valchařská 24/36<br />614 00 Brno</span></a>
+    </div>
+    <div class="footer-cta">
+      <p>Máte prádlo?<br />Vyřešíme zbytek.</p>
+      <a class="arrow-link arrow-link-light" href="/kontakt#poptavka">Nezávazná poptávka <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="shell footer-legal">
+    <span>© {year} Prádelna Jarní</span>
+    <a href="/ochrana-osobnich-udaju">Ochrana osobních údajů</a>
+    <a href="/zasady-cookies">Zásady cookies</a>
+    <a href="/llm-info">LLM info</a>
+    <a href="https://www.jonasrech.com/" target="_blank" rel="noreferrer">Vytvořeno: Jonáš Rech</a>
+  </div>
+  <div class="footer-signature" data-footer-parallax aria-hidden="true">
+    <img src="/assets/footer-wordmark.svg" alt="" />
+  </div>
+</footer>

@@ -1,0 +1,32 @@
+---
+interface Props { currentPath?: string }
+const { currentPath = '/' } = Astro.props;
+const links = [
+  { href: '/sluzby', label: 'Služby' },
+  { href: '/cenik', label: 'Ceník' },
+  { href: '/kontakt', label: 'Kontakt' },
+];
+---
+
+<header class="site-header" data-header>
+  <div class="shell header-inner" data-reveal data-reveal-down>
+      <a class="brand" href="/" aria-label="Prádelna Jarní — domů">
+        <img src="/assets/logo-ink.svg" width="122" height="48" alt="Prádelna Jarní" />
+        <svg class="brand-leaf" viewBox="0 0 88 50.3216" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M84.0996 8.36395C81.6081 8.50646 79.1454 9.12091 77.4282 10.9945C75.933 12.6258 75.4216 14.761 75.2869 16.8883C75.2839 16.9295 75.2615 16.976 75.2252 17C75.1956 16.986 75.1812 16.989 75.1757 16.9523C74.8703 14.921 74.8849 12.7055 75.8589 10.8164C77.9829 6.69647 83.8187 6.3266 87.7913 7.76095C87.8515 7.7828 87.9655 7.8735 87.9867 7.9375C88.0104 8.0081 88.0022 8.0851 87.9641 8.1495C87.8941 8.2691 87.5157 8.5575 87.3775 8.7021C87.0469 9.0459 86.749 9.4178 86.4872 9.8133C85.0503 11.9428 84.1333 15.1061 81.2865 15.7569C79.7086 16.1176 77.9072 15.6664 76.4386 15.0973C77.3505 12.5629 78.6741 10.4756 81.2607 9.2771C82.3685 8.7638 83.3207 8.5678 84.522 8.3975C84.4374 8.3323 84.2432 8.3678 84.0996 8.36395Z" fill="var(--orange)" />
+        </svg>
+      </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" data-menu-toggle>
+      <span class="menu-label">Menu</span>
+      <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
+    </button>
+    <nav class="site-nav" id="site-menu" aria-label="Hlavní navigace" data-menu>
+      <ul>
+        {links.map((link) => (
+          <li><a href={link.href} aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}>{link.label}</a></li>
+        ))}
+      </ul>
+      <a class="button button-primary nav-cta" href="/kontakt#poptavka">Nezávazná poptávka</a>
+    </nav>
+  </div>
+</header>

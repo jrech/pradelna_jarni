@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { Mail, MapPin, Phone } from '@lucide/astro';
+---
+<BaseLayout title="Kontakt a poptávka | Prádelna Jarní Brno" description="Kontaktujte Prádelnu Jarní pro nezávaznou poptávku profesionálního praní v Brně a okolí." path="/kontakt">
+  <PageHero eyebrow="Kontakt" title="Pojďme nastavit praní pro váš provoz." text="Napište nebo zavolejte. Pro první domluvu stačí typ textilu, přibližné množství a představa o četnosti svozu." />
+  <section class="contact-main section" id="poptavka">
+    <div class="shell contact-grid">
+      <div class="contact-sidebar" data-reveal>
+        <section><p class="eyebrow">Obchodní poptávky</p><h2>Mgr. Simona Strakoňová</h2><a class="contact-detail" href="tel:+420604113337"><Phone class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" />+420 604 113 337</a><a class="contact-detail" href="mailto:obchod@pradelnajarni.cz"><Mail class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" />obchod@pradelnajarni.cz</a></section>
+        <section><p class="eyebrow">Provoz prádelny</p><a class="contact-detail" href="tel:+420702000109"><Phone class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" />+420 702 000 109</a><a class="contact-detail" href="mailto:info@pradelnajarni.cz"><Mail class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" />info@pradelnajarni.cz</a></section>
+        <section><p class="eyebrow">Provozovna</p><div class="contact-detail"><MapPin class="contact-icon" size={16} stroke-width={1.8} aria-hidden="true" /><address>Valchařská 24/36<br />614 00 Brno</address></div><p>IČ 08063001<br />DIČ CZ08063001</p></section>
+      </div>
+      <form class="contact-form" data-contact-form data-reveal>
+        <div class="form-row"><label>Jméno a příjmení <span>*</span><input name="jmeno" autocomplete="name" required /></label><label>Firma<input name="firma" autocomplete="organization" /></label></div>
+        <div class="form-row"><label>Telefon <span>*</span><input name="telefon" type="tel" autocomplete="tel" required /></label><label>E-mail <span>*</span><input name="email" type="email" autocomplete="email" required /></label></div>
+        <label>Co potřebujete vyřešit? <span>*</span><textarea name="zprava" rows="6" required placeholder="Typ textilu, přibližné množství, četnost svozu…"></textarea></label>
+        <p class="form-note">Odesláním formuláře souhlasíte se zpracováním osobních údajů za účelem vyřízení vaší poptávky. Více informací najdete v <a href="/ochrana-osobnich-udaju">zásadách ochrany osobních údajů</a>.</p>
+        <button class="button button-primary" type="submit">Odeslat poptávku</button>
+      </form>
+    </div>
+  </section>
+  <section class="map-section">
+    <iframe title="Mapa provozovny Prádelny Jarní" src="https://www.google.com/maps?q=Valchařská+24%2F36,+614+00+Brno&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </section>
+</BaseLayout>
+<style>
+  .contact-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); }
+  .contact-sidebar { grid-column: 1 / span 4; }
+  .contact-sidebar section { padding: 0 0 var(--space-8); margin-bottom: var(--space-8); border-bottom: 1px solid var(--line); }
+  .contact-sidebar section:last-child { border-bottom: 0; }
+  .contact-sidebar h2 { margin-bottom: var(--space-4); font-size: var(--type-xl); }
+  .contact-sidebar a { display: block; width: fit-content; margin: 5px 0; border-bottom: 1px solid transparent; }
+  .contact-sidebar address { margin-bottom: 16px; font-style: normal; }
+  .contact-detail { display: inline-flex !important; align-items: flex-start; gap: 8px; }
+  .contact-sidebar .contact-detail { display: flex !important; }
+  .contact-icon { flex: 0 0 auto; margin-top: .12em; }
+  .contact-detail .contact-icon { color: var(--orange); }
+  .contact-sidebar section > p:last-child { color: var(--muted); }
+  .contact-form { grid-column: 6 / -1; padding: var(--space-12); color: var(--cream); background: var(--ink); border-radius: var(--radius); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  label { display: block; margin-bottom: 25px; font-size: var(--type-sm); font-weight: 500; }
+  label span { color: var(--orange); }
+  input, textarea { display: block; width: 100%; margin-top: 9px; padding: 15px 0; color: var(--cream); border: 0; border-bottom: 1px solid color-mix(in srgb, var(--cream) 32%, transparent); border-radius: 0; outline: none; background: transparent; font-size: 16px; transition: border-color 250ms var(--ease-out), box-shadow 250ms var(--ease-out); }
+  input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--cream) 62%, transparent); opacity: 1; }
+  textarea { min-height: 150px; resize: vertical; }
+  input:focus, textarea:focus { border-color: var(--orange); box-shadow: 0 2px 0 var(--orange); }
+  .form-note { max-width: 640px; margin: 2px 0 25px; color: color-mix(in srgb, var(--cream) 72%, transparent); font-size: 12px; }
+  .form-note a { color: var(--cream); text-decoration: underline; text-underline-offset: 2px; }
+  .map-card .arrow-link { display: inline-flex; align-items: center; gap: 8px; }
+  .map-section { position: relative; min-height: 560px; }
+  .map-section iframe { display: block; width: 100%; height: 560px; border: 0; filter: grayscale(.75) contrast(.9); }
+  @media (max-width: 760px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-sidebar, .contact-form { grid-column: 1; }
+    .contact-form { padding: 30px 20px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .map-section { min-height: 650px; }
+    .map-section iframe { height: 650px; }
+  }
+</style>

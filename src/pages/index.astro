@@ -1,0 +1,419 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Check, FoldHorizontal, ListFilter, WashingMachine, Wind } from '@lucide/astro';
+
+const audiences = [
+  ['01', 'Hotely a wellness', 'Pravidelný cyklus ložního prádla, ručníků a županů podle rytmu vašeho provozu.'],
+  ['02', 'Penziony a apartmány', 'Flexibilní praní pro menší ubytování, které lze spojit také s úklidem apartmánů.'],
+  ['03', 'Restaurace a gastro provozy', 'Ubrusy, utěrky, zástěry a další textil připravený na další směnu.'],
+  ['04', 'Firmy a průmysl', 'Provozní, pracovní a úklidový textil v režimu domluveném pro konkrétní firmu.'],
+];
+const services = [
+  { title: 'Praní', text: 'Ložní prádlo, ručníky, župany, ubrusy, utěrky i další provozní textil.', Icon: WashingMachine },
+  { title: 'Sušení', text: 'Šetrné a důkladné sušení podle typu prádla a materiálu.', Icon: Wind },
+  { title: 'Mandlování', text: 'Profesionální úprava ložního a stolního prádla pro čistý a reprezentativní výsledek.', Icon: FoldHorizontal },
+  { title: 'Třídění', text: 'Prádlo roztřídíme, složíme a připravíme podle potřeb vašeho provozu.', Icon: ListFilter },
+];
+const steps = [
+  ['01', 'Domluva', 'Projdeme typ textilu, objem a režim, který vašemu provozu dává smysl.'],
+  ['02', 'Vyzvednutí', 'Špinavé prádlo vyzvedneme podle společně domluveného svozu.'],
+  ['03', 'Zpracování', 'Vypereme, usušíme a podle potřeby vymandlujeme, vytřídíme a zabalíme.'],
+  ['04', 'Doručení', 'Čisté a připravené prádlo přivezeme zpět k vám.'],
+];
+const processImages = [
+  ['/assets/process-domluva.webp', 'Domluva o typu textilu v profesionální prádelně'],
+  ['/assets/process-vyzvednuti.webp', 'Vyzvednutí špinavého prádla v prádelně'],
+  ['/assets/process-zpracovani.webp', 'Skládání čistého prádla po zpracování'],
+  ['/assets/process-doruceni.webp', 'Pracovnice připravuje čisté prádlo k doručení'],
+];
+const values = [
+  ['Spolehlivost', 'Na prádlo nemusíte čekat. Držíme se domluvených termínů a nastaveného režimu svozu, aby bylo čisté prádlo připravené včas.'],
+  ['Flexibilita', 'Podle rytmu vašeho provozu. Frekvenci svozu, objem prádla i rozsah služeb přizpůsobíme tomu, jak fungujete.'],
+  ['Přímá komunikace', 'Bez zbytečných mezičlánků. Když potřebujete něco změnit nebo vyřešit, komunikujete přímo s námi.'],
+];
+---
+
+<BaseLayout
+  title="Profesionální prádelna Brno | Prádelna Jarní"
+  description="Profesionální praní se svozem a rozvozem pro hotely, apartmány, gastro a firmy v Brně a okolí."
+>
+  <section class="hero">
+    <div class="shell hero-copy">
+      <h1 class="display" data-hero-title>Profesionální praní pro hotely, gastro a firmy.</h1>
+      <div class="hero-intro">
+        <p data-hero-intro-copy>Postaráme se o vaše provozní prádlo od svozu až po doručení. Vypereme, usušíme, připravíme a přivezeme zpět.</p>
+        <a class="arrow-link" data-hero-intro-link href="#sluzby">Prohlédnout služby <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <div class="shell hero-image" data-hero-image>
+      <img src="/assets/hero-laundry.png" width="1672" height="941" alt="Detail profesionálně připraveného prádla" fetchpriority="high" />
+    </div>
+  </section>
+
+  <section class="audience" id="pro-koho" data-audience>
+    <div class="audience-sticky">
+      <div class="shell audience-grid">
+        <div class="audience-intro">
+          <h2 data-reveal data-reveal-early>Každý provoz funguje jinak. Praní přizpůsobíme tomu vašemu.</h2>
+          <p data-reveal data-reveal-early data-reveal-delay="0.08">Zajistíme svoz, praní, sušení, mandlování, třídění, skládání a balení podle domluveného režimu.</p>
+          <a class="button button-primary" data-reveal data-reveal-early data-reveal-delay="0.16" href="/kontakt#poptavka">Nezávazná poptávka</a>
+        </div>
+        <div class="audience-list">
+          {audiences.map(([number, title, text], index) => (
+            <article class="audience-item" data-audience-item data-active={index === 0}>
+              <span>{number}</span>
+              <div><h3>{title}</h3><p>{text}</p></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="sluzby">
+    <div class="shell services-inner">
+      <header class="services-heading">
+        <h2 data-reveal>Všechno, co vaše prádlo potřebuje</h2>
+        <p data-reveal data-reveal-delay="0.08">Od praní a sušení až po finální přípravu a svoz. Postaráme se o celý proces tak, aby se k vám prádlo vrátilo čisté, připravené a ve správný čas.</p>
+      </header>
+      <div class="service-grid">
+        {services.map(({ title, text, Icon }) => (
+          <article class="service-card" data-reveal data-reveal-stagger>
+            <span class="service-icon" aria-hidden="true"><Icon size={19} stroke-width={1.75} /></span>
+            <div><h3>{title}</h3><p>{text}</p></div>
+          </article>
+        ))}
+      </div>
+      <aside class="apartment-callout" data-reveal>
+        <h3>Pro apartmány ještě jednodušší provoz</h3>
+        <div><p>U menších ubytování můžeme servis prádla spojit také s úklidem.<br />Místo koordinace několika dodavatelů řešíte vše na jednom místě.</p>
+        <a class="arrow-link" href="/sluzby#uklid">Zjistit více <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <div class="textile-strip" aria-label="Zpracovávané druhy textilu">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <span>Ložní prádlo</span><i></i><span>Ručníky</span><i></i><span>Župany</span><i></i><span>Ubrusy</span><i></i><span>Utěrky</span><i></i><span>Zástěry</span><i></i><span>Provozní textil</span><i></i>
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <span>Ložní prádlo</span><i></i><span>Ručníky</span><i></i><span>Župany</span><i></i><span>Ubrusy</span><i></i><span>Utěrky</span><i></i><span>Zástěry</span><i></i><span>Provozní textil</span><i></i>
+      </div>
+    </div>
+  </div>
+
+  <section class="process" id="jak-to-funguje" data-process>
+    <div class="process-scroll">
+      <div class="process-sticky">
+        <div class="shell process-grid">
+          <div class="process-content">
+            <p class="eyebrow" data-reveal>Jak to funguje</p>
+            <h2 data-reveal data-reveal-delay="0.08">Čtyři kroky, které drží prádlo v pohybu.</h2>
+            <ol class="timeline">
+              {steps.map(([, title, text], index) => (
+                <li data-process-step data-active={index === 0}>
+                  <div><h3>{title}</h3><p>{text}</p></div>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div class="process-visual">
+            {processImages.map(([src, alt], index) => (
+              <img src={src} width="1200" height="800" alt={alt} data-process-image data-active={index === 0} loading={index === 0 ? 'eager' : 'lazy'} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="values" id="hodnoty">
+    <div class="shell values-shell">
+      <header class="values-intro">
+        <h2 data-reveal>Prádlo vyřešíme.<br />Vy řešte svůj provoz.</h2>
+        <p data-reveal data-reveal-delay="0.08">Postaráme se o celý proces od svozu po doručení.<br />Vy se můžete soustředit na svůj provoz.</p>
+      </header>
+      <div class="value-items">
+        {values.map(([title, text], index) => (
+          <article class="value-item" style={`--value-index: ${index}`}>
+            <header class="value-item-header">
+              <span>0{index + 1}</span>
+              <h3>{title}</h3>
+            </header>
+            <div class="value-item-body"><p>{text}</p></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="o-nas">
+    <div class="shell about-grid">
+      <div class="about-top">
+        <div class="about-title">
+          <h2 data-reveal data-reveal-delay="0">Prádelna, na kterou se můžete spolehnout.</h2>
+          <a class="button button-primary" data-reveal data-reveal-delay="0.28" href="/kontakt#poptavka">Nezávazná poptávka</a>
+        </div>
+        <div class="about-copy">
+          <h3 data-reveal data-reveal-delay="0.14">Čisté prádlo je základ. Stejně důležité je, aby bylo připravené ve chvíli, kdy ho potřebujete.</h3>
+          <p data-reveal data-reveal-delay="0.42">Proto se domluvíme na režimu, který vám vyhovuje — od pravidelného svozu až po doručení čistého prádla zpět. Když se něco změní, řešíte to přímo s námi.</p>
+          <div class="about-trust" data-reveal data-reveal-delay="0.56"><Check size={14} stroke-width={2} aria-hidden="true" /><span>Možnost využít náhradní plnění</span></div>
+        </div>
+      </div>
+      <div class="about-image" data-image-reveal>
+        <img src="/assets/about-laundry.png" width="2016" height="2520" alt="Detail práce s textilem v prádelně" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq" id="faq">
+    <div class="shell faq-grid">
+      <div><p class="eyebrow" data-reveal>Časté otázky</p><h2 data-reveal data-reveal-delay="0.08">Než se domluvíme.</h2></div>
+      <div class="faq-list">
+        <details data-reveal data-reveal-stagger data-reveal-delay="0"><summary>Musím se vázat dlouhodobou smlouvou?<span>+</span></summary><p>Ne. Spolupráci lze domluvit i bez dlouhodobé smlouvy a vyzkoušet si, zda vám nastavený režim vyhovuje. U pravidelné spolupráce lze řešit výhodnější podmínky a kapacitu.</p></details>
+        <details data-reveal data-reveal-stagger data-reveal-delay="0.08"><summary>Jak funguje svoz a rozvoz?<span>+</span></summary><p>Režim svozu nastavíme podle typu provozu, objemu a vašich potřeb. Konkrétní dny a četnost jsou součástí domluvy.</p></details>
+        <details data-reveal data-reveal-stagger data-reveal-delay="0.16"><summary>Jak se stanovuje cena?<span>+</span></summary><p>Ceník je orientační. Výsledná cena se může odvíjet od sortimentu, množství, pravidelnosti a logistiky.</p></details>
+        <details data-reveal data-reveal-stagger data-reveal-delay="0.24"><summary>Lze využít náhradní plnění?<span>+</span></summary><p>Ano, náhradní plnění lze uplatnit na všechny naše služby. Konkrétní podmínky probereme při poptávce.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="shell final-cta-inner" data-reveal>
+      <h2>Řekněte nám, co perete. Navrhneme další postup.</h2>
+      <a class="button button-primary" href="/kontakt#poptavka">Nezávazná poptávka</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero { padding: var(--space-8) 0 var(--section-standard); }
+  .hero-copy { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); align-items: end; margin-bottom: var(--rel-intro-content); padding-block: 60px; }
+  .hero h1 { grid-column: 1 / span 8; max-width: 668px; margin: 0; }
+  .hero-intro { grid-column: 9 / -1; padding-bottom: 0; margin-bottom: -20px; }
+  .hero-intro p { margin-bottom: var(--rel-heading-copy); font-size: var(--type-lg); line-height: 1.48; }
+  .hero-image { position: relative; overflow: hidden; aspect-ratio: 1.777; }
+  .hero-image img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
+  .audience { height: 165svh; color: var(--cream); background: var(--ink); }
+  .audience-sticky { position: sticky; top: var(--header-height); display: flex; height: calc(100svh - var(--header-height)); align-items: center; overflow: hidden; }
+  .audience-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); align-items: start; }
+  .audience-intro { grid-column: 1 / span 5; }
+  .audience-intro h2 { max-width: 510px; margin-bottom: var(--rel-heading-copy); font-size: clamp(var(--type-3xl), 3.65vw, var(--type-5xl)); line-height: 1.02; }
+  .audience-intro > p { max-width: 485px; margin-bottom: var(--rel-content-group); color: rgba(243,238,227,.72); font-size: var(--type-lg); line-height: 1.45; }
+  .audience-intro .button { min-width: 190px; }
+  .audience-list { grid-column: 7 / -1; }
+  .audience-item { display: grid; grid-template-columns: 96px 1fr; min-height: 128px; padding: 24px 0; align-items: start; border-top: 1px solid rgba(243,238,227,.24); opacity: .46; transition: opacity 180ms var(--ease-out), border-color 180ms var(--ease-out); }
+  .audience-item:first-child { border-top: 0; }
+  .audience-item:last-child { border-bottom: 0; }
+  .audience-item[data-active] { border-color: rgba(232,106,69,.62); opacity: 1; }
+  .audience-item > span { color: rgba(243,238,227,.28); font-size: clamp(var(--type-3xl), 3.5vw, var(--type-5xl)); font-weight: 400; line-height: 1; letter-spacing: -.05em; transition: color 180ms var(--ease-out), opacity 180ms var(--ease-out); }
+  .audience-item[data-active] > span { color: var(--orange); }
+  .audience-item h3 { margin: 0 0 10px; font-size: clamp(var(--type-xl), 2.1vw, var(--type-2xl)); line-height: 1.08; }
+  .audience-item p { max-width: 490px; margin: 0; color: rgba(243,238,227,.68); font-size: 16px; transition: color 180ms var(--ease-out); }
+  .audience-item[data-active] p { color: rgba(243,238,227,.9); }
+  .services { padding-block: var(--section-large); background: var(--warm-white); }
+  .services-inner { display: flex; flex-direction: column; gap: var(--rel-intro-content); }
+  .services-heading { width: min(740px, 100%); margin-inline: auto; text-align: center; }
+  .services-heading h2 { margin-bottom: var(--rel-heading-copy); color: #202322; font-size: clamp(var(--type-3xl), 3.2vw, var(--type-4xl)); line-height: 1.12; letter-spacing: -.035em; }
+  .services-heading p { width: min(606px, 100%); margin: 0 auto; color: #202322; font-size: var(--font-size-body); line-height: 1.5; }
+  .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--rel-card-gap); margin-top: 0; }
+  .service-card { display: flex; height: 276px; padding: var(--space-12) var(--space-6); color: var(--warm-white); border-radius: 4px; background: var(--ink); flex-direction: column; gap: var(--rel-card-gap); transition: transform 180ms var(--ease-out); }
+  .service-icon { display: grid; width: 33px; height: 33px; flex: 0 0 33px; place-items: center; color: var(--ink); border-radius: 4px; background: var(--warm-white); transition: color 250ms var(--ease-out), background-color 300ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .service-card:hover { transform: translateY(-6px); }
+    .service-card:hover .service-icon { color: var(--warm-white); background: var(--orange); }
+  }
+  .service-icon :global(svg) { display: block; width: 19px; height: 19px; }
+  .service-card h3 { margin-bottom: 15px; font-size: var(--type-2xl); font-weight: 500; line-height: 1; letter-spacing: -.035em; }
+  .service-card p { margin: 0; color: rgba(250,248,243,.8); font-size: 16px; line-height: 1.4; transition: color 250ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .service-card:hover p { color: rgba(250,248,243,1); }
+  }
+  .apartment-callout { display: grid; grid-template-columns: 462px 569px; gap: 204px; align-items: start; }
+  .apartment-callout h3 { margin: 0; color: #202322; font-size: var(--type-xl); font-weight: 400; line-height: 1.3; letter-spacing: -.025em; }
+  .apartment-callout p { margin: 0 -25px 19px 0; color: #202322; font-size: var(--font-size-body); line-height: 1.5; }
+  .apartment-callout .arrow-link { min-height: auto; gap: 8px; color: #202322; font-size: var(--font-size-body); font-weight: 400; line-height: 1.4; }
+  .apartment-callout .arrow-link:hover { color: var(--orange); }
+  .textile-strip { overflow: hidden; color: var(--cream); background: var(--ink); }
+  .marquee-track { display: flex; width: max-content; align-items: center; padding: var(--space-6) 0; animation: marquee 28s linear infinite; }
+  .marquee-group { display: flex; flex: none; align-items: center; gap: var(--space-8); }
+  .marquee-track span { font-size: var(--type-xl); white-space: nowrap; }
+  .marquee-track i { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .process { --process-progress: 0; background: var(--warm-white); }
+  .process-scroll { height: 240vh; min-height: 1700px; }
+  .process-sticky { position: sticky; top: var(--header-height); display: flex; height: calc(100vh - var(--header-height)); min-height: 680px; align-items: center; overflow: hidden; }
+  .process-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); align-items: center; }
+  .process-content { grid-column: 1 / span 5; }
+  .process-content > h2 { max-width: 520px; margin-bottom: var(--rel-intro-content); font-size: clamp(var(--type-3xl), 3.4vw, var(--type-4xl)); line-height: 1.04; }
+  .process-visual { position: relative; grid-column: 7 / -1; overflow: hidden; height: min(70vh, 690px); min-height: 520px; }
+  .process-visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 51% center; border-radius: var(--radius); opacity: 0; pointer-events: none; transform: scale(1.015); transition: opacity 320ms var(--ease-out); }
+  .process-visual img[data-active] { opacity: 1; }
+  .timeline { position: relative; margin: 0; padding: 0 0 0 26px; list-style: none; }
+  .timeline::before, .timeline::after { position: absolute; top: 0; bottom: 0; left: 0; width: 7px; border-radius: 4px; content: ''; }
+  .timeline::before { background: #dfe3e2; }
+  .timeline::after { background: var(--orange); transform: scaleY(var(--process-progress)); transform-origin: top; transition: transform 80ms linear; }
+  .timeline li { min-height: 88px; padding: 16px 0; border-top: 1px solid var(--line); opacity: .42; transition: opacity 160ms var(--ease-out), border-color 160ms var(--ease-out); }
+  .timeline li:first-child { border-top: 0; }
+  .timeline li:last-child { border-bottom: 0; }
+  .timeline li[data-active] { border-color: color-mix(in srgb, var(--orange), transparent 45%); opacity: 1; }
+  .timeline h3 { margin-bottom: 7px; font-size: 32px; line-height: 1.15; transition: color 160ms var(--ease-out); }
+  .timeline li[data-active] h3 { color: var(--orange); }
+  .timeline p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.4; }
+  .values {
+    --value-header-height: 104px;
+    --value-body-height: 280px;
+    --value-final-body-height: 60px;
+    --value-copy-column: 108px;
+    --value-sticky-offset: var(--header-height);
+    --value-section-bottom: 60px;
+    padding-bottom: var(--value-section-bottom);
+    color: var(--cream);
+    background: var(--ink);
+  }
+  .values-shell { padding-top: var(--space-40); }
+  .values-intro { max-width: 560px; padding-bottom: var(--space-24); }
+  .values-intro h2 { max-width: 520px; margin: 0 0 var(--rel-heading-copy); font-size: clamp(var(--type-3xl), 4vw, var(--type-5xl)); font-weight: 500; line-height: 1.06; letter-spacing: -.035em; }
+  .values-intro p { margin: 0; color: rgba(243,238,227,.72); font-size: 16px; line-height: 1.45; }
+  .value-items { position: relative; padding-bottom: 0; }
+  .value-item { display: contents; }
+  .value-item-header { position: sticky; z-index: calc(10 + var(--value-index)); top: calc(var(--value-sticky-offset) + var(--value-index) * var(--value-header-height)); display: grid; grid-template-columns: var(--value-copy-column) 1fr; height: var(--value-header-height); padding-bottom: var(--space-4); align-items: end; border-top: 1px solid rgba(243,238,227,.18); background: var(--ink); }
+  .value-item-header span { color: rgba(243,238,227,.12); font-size: clamp(var(--type-4xl), 4.6vw, var(--type-5xl)); font-weight: 350; line-height: 1; letter-spacing: -.04em; }
+  .value-item-header h3 { margin: 0; font-size: clamp(var(--type-xl), 2.5vw, var(--type-2xl)); font-weight: 400; line-height: 1; letter-spacing: -.025em; }
+  .value-item-body { min-height: var(--value-body-height); padding: var(--space-4) 0 var(--space-16) var(--value-copy-column); background: var(--ink); }
+  .value-item:last-child .value-item-body { min-height: var(--value-final-body-height); }
+  .value-item-body p { max-width: 590px; margin: 0; color: rgba(243,238,227,.7); font-size: var(--font-size-body); line-height: 1.5; }
+  .about { padding-block: var(--section-standard); background: var(--mist); }
+  .about-grid { display: flex; flex-direction: column; gap: var(--rel-intro-content); }
+  .about-top { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: start; }
+  .about-title { grid-column: 1 / span 5; }
+  .about-title h2 { max-width: 440px; margin-bottom: var(--space-12); font-size: clamp(var(--type-3xl), 3.1vw, var(--type-4xl)); font-weight: 500; line-height: 1.08; }
+  .about-title .button { min-width: 206px; font-size: 16px; }
+  .about-copy { grid-column: 7 / span 5; padding: 0; }
+  .about-copy h3 { max-width: 510px; margin-bottom: var(--rel-heading-copy); font-size: var(--type-2xl); font-weight: 500; line-height: 1.28; letter-spacing: -.025em; }
+  .about-copy > p { max-width: 590px; margin-bottom: var(--rel-content-group); color: var(--muted); font-size: 16px; line-height: 1.45; }
+  .about-trust { display: flex; align-items: center; gap: 8px; color: var(--ink); font-size: 16px; }
+  .about-trust :global(svg) { flex: 0 0 14px; color: var(--orange); }
+  .about-image { overflow: hidden; width: 100%; aspect-ratio: 2.42 / 1; }
+  .about-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 47%; border-radius: var(--radius); }
+  .faq-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); }
+  .faq-grid > div:first-child { grid-column: 1 / span 4; }
+  .faq-grid h2 { font-size: var(--type-4xl); }
+  .faq-list { grid-column: 6 / -1; }
+  .faq-list details { border-top: 1px solid var(--line); }
+  .faq-list details:first-child { border-top: 0; }
+  .faq-list details:last-child { border-bottom: 0; }
+  .faq-list summary { display: flex; min-height: 78px; align-items: center; justify-content: space-between; gap: 20px; cursor: pointer; font-size: var(--type-lg); font-weight: 500; list-style: none; }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary span { font-size: 25px; font-weight: 300; transition: transform 180ms var(--ease-out); }
+  .faq-list details[open] summary span { transform: rotate(45deg); }
+  .faq-list details p { max-width: 670px; margin: 0 42px var(--space-6) 0; color: var(--muted); }
+  .final-cta { padding-block: var(--section-large); color: var(--warm-white); background: var(--orange); }
+  .final-cta-inner { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); align-items: end; }
+  .final-cta h2 { grid-column: 1 / span 8; margin: 0; font-size: clamp(var(--type-4xl), 4.7vw, var(--type-5xl)); line-height: 1; }
+  .final-cta .button { grid-column: 10 / -1; justify-self: end; padding: 16px 32px; color: var(--ink); background: var(--warm-white); font-size: 16px; }
+
+  @media (max-width: 1100px) {
+    .apartment-callout { grid-template-columns: 1fr 1.25fr; gap: 64px; }
+  }
+
+  @media (max-width: 960px) {
+    .hero-copy { grid-template-columns: 1fr; }
+    .hero h1, .hero-intro { grid-column: 1; }
+    .hero-intro { max-width: 580px; margin-top: 20px; }
+    .audience-intro { grid-column: 1 / span 5; }
+    .audience-list { grid-column: 6 / -1; }
+    .audience-item { grid-template-columns: 72px 1fr; }
+    .service-grid { grid-template-columns: repeat(2, 1fr); }
+    .service-card { height: 276px; }
+    .apartment-callout { grid-template-columns: 1fr 1.25fr; gap: 64px; }
+    .process-content { grid-column: 1 / span 5; }
+    .process-visual { grid-column: 7 / -1; }
+    .values { --value-header-height: 96px; --value-body-height: 240px; --value-copy-column: 84px; }
+    .values-shell { padding-top: var(--section-large); }
+    .values-intro { padding-bottom: var(--space-20); }
+    .about-copy { padding-right: 0; }
+    .final-cta h2 { grid-column: 1 / span 8; }
+    .final-cta .button { grid-column: 10 / -1; margin-top: var(--space-6); }
+  }
+
+  @media (max-width: 700px) {
+    .hero { padding: var(--space-6) 0 var(--section-large); }
+    .hero-copy { margin-bottom: var(--space-12); padding-block: 0; }
+    .hero-intro { margin-bottom: 0; }
+    .hero-image { width: 100%; aspect-ratio: 1 / 1.05; }
+    .hero-image img { object-position: center; }
+    .audience { height: auto; min-height: 0; }
+    .audience-sticky { position: static; height: auto; min-height: 0; padding-block: var(--section-large); overflow: visible; }
+    .audience-grid, .process-grid, .faq-grid, .final-cta-inner { grid-template-columns: 1fr; }
+    .audience-intro, .audience-list, .process-visual, .process-content, .faq-grid > div:first-child, .faq-list, .final-cta h2, .final-cta .button { grid-column: 1; }
+    .audience-intro { margin-bottom: var(--space-12); }
+    .audience-intro h2 { font-size: var(--type-3xl); }
+    .audience-item { grid-template-columns: 58px 1fr; min-height: 0; padding: 26px 0; opacity: 1; }
+    .audience-item > span { color: var(--orange); font-size: var(--type-2xl); }
+    .audience-item p { color: rgba(243,238,227,.7); }
+    .services { padding-block: var(--section-large); }
+    .services-inner { gap: var(--space-12); }
+    .services-heading { text-align: left; }
+    .services-heading h2 { font-size: 36px; }
+    .services-heading p { font-size: var(--font-size-body); }
+    .service-grid { grid-template-columns: 1fr; }
+    .service-grid { gap: var(--space-4); margin-top: 0; }
+    .service-card { height: auto; min-height: 246px; padding: var(--space-12) var(--space-6); }
+    .apartment-callout { grid-template-columns: 1fr; }
+    .apartment-callout { gap: var(--space-6); padding-top: 0; }
+    .apartment-callout h3 { font-size: 25px; }
+    .apartment-callout p { margin-right: 0; font-size: var(--font-size-body); }
+    .marquee-group { gap: 24px; }
+    .marquee-track { animation-duration: 38s; }
+    .marquee-track span { font-size: 20px; }
+    .process-scroll { height: auto; min-height: 0; }
+    .process-sticky { position: static; height: auto; min-height: 0; padding-block: var(--section-large); overflow: visible; }
+    .process-content { order: 1; }
+    .process-visual { order: 2; height: auto; min-height: 0; aspect-ratio: 1.25; margin-top: var(--space-12); }
+    .timeline { padding-left: 20px; }
+    .timeline::after { transform: scaleY(1); }
+    .timeline li { min-height: 0; opacity: 1; }
+    .timeline li h3 { color: var(--ink); }
+    .timeline li[data-active] h3 { color: var(--ink); }
+    .values { --value-header-height: auto; padding-block: var(--section-large); }
+    .values-shell { padding-top: 0; }
+    .values-intro { padding-bottom: var(--section-standard); }
+    .values-intro h2 { font-size: clamp(39px, 11vw, 52px); }
+    .value-items { padding-bottom: 0; }
+    .value-item { display: block; border-top: 1px solid rgba(243,238,227,.23); }
+    .value-item:last-child { border-bottom: 1px solid rgba(243,238,227,.23); }
+    .value-item-header { position: static; grid-template-columns: 58px 1fr; height: auto; min-height: 0; padding: var(--space-8) 0 0; align-items: start; border: 0; }
+    .value-item-header span { color: var(--orange); font-size: 13px; }
+    .value-item-header h3 { font-size: var(--type-2xl); line-height: 1.08; }
+    .value-item-body { min-height: 0; padding: var(--space-4) 0 var(--space-8) 58px; }
+    .value-item:last-child .value-item-body { min-height: 0; }
+    .value-item-body p { font-size: var(--font-size-body); }
+    .about { padding-block: var(--section-large); }
+    .about-grid { gap: var(--space-12); }
+    .about-top { grid-template-columns: 1fr; gap: var(--space-12); }
+    .about-title, .about-copy { grid-column: 1; }
+    .about-title h2 { margin-bottom: 30px; font-size: var(--type-3xl); }
+    .about-copy h3 { font-size: var(--type-2xl); }
+    .about-image { aspect-ratio: 4 / 5; }
+    .about-image img { object-position: 49% center; }
+    .faq-grid > div:first-child { margin-bottom: 30px; }
+    .final-cta .button { justify-self: start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { width: auto; flex-wrap: wrap; animation: none; }
+    .marquee-group { flex-wrap: wrap; }
+    .marquee-group[aria-hidden="true"] { display: none; }
+    .audience-item { opacity: 1; transition: none; }
+    .audience-item > span { transition: none; }
+    .timeline::after,
+    .timeline li { transition: none; }
+    .process-visual img { transition: none; }
+    .service-card,
+    .service-icon,
+    .service-card p { transition: none; }
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FinalCta from '../components/FinalCta.astro';
+
+const groups = [
+  { title: 'Ložní a koupelnový textil', items: [
+    ['Deka — povlak, jednolůžko', '32 Kč / ks'], ['Polštář', '17 Kč / ks'], ['Prostěradlo jednolůžko', '22 Kč / ks'], ['Prostěradlo dvojlůžko', '42 Kč / ks'], ['Osuška', '18 Kč / ks'], ['Ručník', '14 Kč / ks'], ['Předložka', '14 Kč / ks'], ['Župan', '55 Kč / ks'],
+  ]},
+  { title: 'Doplňkový textil', items: [
+    ['Deka', '176 Kč / ks'], ['Larisa', '77 Kč / ks'], ['Polštář — výplň', '99 Kč / ks'], ['Chránič matrace jednolůžko', '55 Kč / ks'], ['Povlak na matraci jednolůžko', '110 Kč / ks'],
+  ]},
+  { title: 'Gastro a logistika', items: [
+    ['Utěrka', '11 Kč / ks'], ['Ubrus', '33 Kč / ks'], ['Napron', '20 Kč / ks'], ['Doprava', '139 Kč'], ['Pytel na prádlo', '6 Kč / ks'],
+  ]},
+];
+---
+<BaseLayout title="Ceník praní pro firmy | Prádelna Jarní" description="Orientační ceník profesionálního praní ložního, koupelnového a gastro textilu v Brně." path="/cenik">
+  <PageHero eyebrow="Orientační ceník" title="Jasný základ. Konkrétní nabídka podle vašeho provozu." text="Ceny níže jsou orientační a uvedené bez DPH. Výsledná cena se může měnit podle rozsahu, pravidelnosti a logistiky." />
+  <section class="pricing section">
+    <div class="shell price-groups">
+      {groups.map((group, groupIndex) => (
+        <section class="price-group" data-reveal>
+          <div class="price-heading"><span>0{groupIndex + 1}</span><h2>{group.title}</h2></div>
+          <dl>{group.items.map(([name, price]) => <div><dt>{name}</dt><dd>{price}</dd></div>)}</dl>
+        </section>
+      ))}
+    </div>
+  </section>
+  <section class="section section-ink price-note">
+    <div class="shell note-grid">
+      <h2 data-reveal>Pravidelný provoz si zaslouží vlastní kalkulaci.</h2>
+      <div data-reveal><p class="lead">Při poptávce nám stačí přiblížit typ textilu, množství a četnost svozu. Podle toho připravíme konkrétní podmínky.</p><p>Fakturace probíhá měsíčně podle skutečných dodávek. U nové spolupráce může být domluvena záloha.</p><a class="arrow-link arrow-link-light" href="/kontakt#poptavka">Poptat kalkulaci <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+  <FinalCta title="Pošlete nám přibližný objem. Ozveme se s dalším postupem." />
+</BaseLayout>
+<style>
+  .price-groups { display: grid; gap: var(--space-20); }
+  .price-group { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); }
+  .price-heading { grid-column: 1 / span 4; }
+  .price-heading span { color: var(--orange); font-size: 12px; }
+  .price-heading h2 { max-width: 330px; margin-top: 20px; font-size: var(--type-2xl); line-height: 1.08; }
+  dl { grid-column: 5 / -1; margin: 0; border-top: 1px solid var(--ink); }
+  dl div { display: flex; min-height: 59px; align-items: center; justify-content: space-between; gap: 30px; border-bottom: 1px solid var(--line); }
+  .price-group dl div:last-child { border-bottom: 0; }
+  dt { color: var(--muted); }
+  dd { margin: 0; font-weight: 500; white-space: nowrap; }
+  .note-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); }
+  .note-grid h2 { grid-column: 1 / span 6; max-width: 640px; font-size: clamp(var(--font-size-h1), 4.5vw, var(--font-size-display)); line-height: var(--line-height-display); }
+  .note-grid > div { grid-column: 8 / -1; }
+  .note-grid > div > p:not(.lead) { color: rgba(243,238,227,.66); }
+  .note-grid .arrow-link { margin-top: var(--space-6); }
+  @media (max-width: 760px) {
+    .price-group, .note-grid { grid-template-columns: 1fr; }
+    .price-heading, dl, .note-grid h2, .note-grid > div { grid-column: 1; }
+    .price-heading { margin-bottom: 16px; }
+    .price-groups { gap: var(--section-compact); }
+    .note-grid > div { margin-top: var(--space-6); }
+  }
+</style>

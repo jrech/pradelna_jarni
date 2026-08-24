@@ -1,0 +1,17 @@
+---
+interface Props { title?: string }
+const { title = 'Řekněte nám, co perete. Navrhneme další postup.' } = Astro.props;
+---
+<section class="shared-cta">
+  <div class="shell shared-cta-inner" data-reveal>
+    <h2>{title}</h2>
+    <a class="button" href="/kontakt#poptavka">Nezávazně poptat praní</a>
+  </div>
+</section>
+<style>
+  .shared-cta { padding-block: clamp(90px, 11vw, 154px); color: var(--warm-white); background: var(--orange); }
+  .shared-cta-inner { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+  h2 { max-width: 760px; margin: 0; font-size: clamp(42px, 4.7vw, 66px); line-height: 1; }
+  .button { flex: 0 0 auto; align-self: end; color: var(--ink); background: var(--warm-white); }
+  @media (max-width: 960px) { .shared-cta-inner { align-items: flex-start; flex-direction: column; } .button { margin-top: 28px; } }
+</style>

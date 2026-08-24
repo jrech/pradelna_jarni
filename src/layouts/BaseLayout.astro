@@ -1,0 +1,69 @@
+---
+import '@fontsource-variable/geist';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description,
+  path = '/',
+  image = '/assets/hero-laundry.png',
+} = Astro.props;
+const canonical = new URL(path, Astro.site);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Prádelna Jarní',
+  url: Astro.site?.href,
+  image: new URL(image, Astro.site).href,
+  telephone: '+420604113337',
+  email: 'obchod@pradelnajarni.cz',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Valchařská 24/36',
+    addressLocality: 'Brno',
+    postalCode: '614 00',
+    addressCountry: 'CZ',
+  },
+  areaServed: 'Brno a okolí',
+};
+---
+
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#19333d" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#obsah">Přejít na obsah</a>
+    <Header currentPath={path} />
+    <main id="obsah">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/site.js';
+    </script>
+  </body>
+</html>

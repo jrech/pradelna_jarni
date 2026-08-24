@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import FinalCta from '../components/FinalCta.astro';
+
+const laundryServices = [
+  ['Praní', 'Profesionálně zpracujeme ložní, koupelnový, gastro i další provozní textil. Konkrétní postup se odvíjí od materiálu a potřeb provozu.'],
+  ['Sušení', 'Na praní navazuje sušení tak, aby bylo prádlo připravené pro další kroky a následné použití.'],
+  ['Mandlování', 'Ložní prádlo, ubrusy a další vhodný textil vymandlujeme do hladkého a reprezentativního výsledku.'],
+  ['Třídění a balení', 'Čisté kusy vytřídíme, složíme a zabalíme, aby jejich převzetí i další manipulace byly jednoduché.'],
+];
+---
+<BaseLayout title="Prádelenské služby pro firmy | Prádelna Jarní" description="Praní, sušení, mandlování, třídění, balení a svoz provozního prádla pro firmy a ubytování v Brně." path="/sluzby">
+  <PageHero eyebrow="Služby" title="Celý cyklus péče o provozní prádlo." text="Od domluvy a svozu přes praní až po připravené prádlo zpět u vás. Rozsah služby nastavíme podle vašeho provozu." />
+
+  <section class="section service-detail" id="prani">
+    <div class="shell detail-list">
+      {laundryServices.map(([title, text], index) => (
+        <article data-reveal id={index === 2 ? 'mandlovani' : undefined}>
+          <span>0{index + 1}</span><h2>{title}</h2><p>{text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section-large section-ink logistics" id="logistika">
+    <div class="shell logistics-grid">
+      <div data-reveal><p class="eyebrow">Svoz a doručení</p><h2>Logistika je součást služby.</h2></div>
+      <div class="logistics-copy" data-reveal><p class="lead">Špinavé prádlo vyzvedneme a čisté přivezeme zpět. Četnost a režim svozu domluvíme podle objemu, typu textilu a potřeb vašeho provozu.</p><p>Konkrétní dny, časová okna a podmínky nevycházejí z univerzálního balíčku. Nastavíme je společně při poptávce.</p></div>
+    </div>
+  </section>
+
+  <section class="section-large apartment" id="uklid">
+    <div class="shell apartment-grid">
+      <div class="apartment-image" data-image-reveal><img src="/assets/about-laundry.png" width="2016" height="2520" alt="Připravené textilie pro ubytovací provoz" loading="lazy" /></div>
+      <div class="apartment-copy" data-reveal><p class="eyebrow">Apartmány a Airbnb</p><h2>Praní a úklid na jednom místě.</h2><p class="lead">U menších ubytování můžeme praní spojit také s úklidem apartmánu. Místo koordinace více dodavatelů tak řešíte obě služby přímo s námi.</p><a class="arrow-link" href="/kontakt#poptavka">Poptat služby pro apartmán <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
+  <section class="section section-mist textiles">
+    <div class="shell"><p class="eyebrow" data-reveal>Co běžně zpracujeme</p><h2 class="section-title" data-reveal data-reveal-delay="0.08">Textil, který váš provoz potřebuje každý den.</h2><ul data-reveal data-reveal-delay="0.16"><li>Ložní prádlo</li><li>Ručníky a osušky</li><li>Župany</li><li>Ubrusy a naprony</li><li>Utěrky a zástěry</li><li>Provozní textil</li><li>Úklidové textilie</li></ul></div>
+  </section>
+  <FinalCta />
+</BaseLayout>
+<style>
+  .detail-list { border-top: 1px solid var(--ink); }
+  .detail-list article { display: grid; grid-template-columns: 1fr 4fr 4fr; gap: var(--space-6); padding: var(--space-12) 0; border-bottom: 1px solid var(--line); }
+  .detail-list article:last-child { border-bottom: 0; }
+  .detail-list span { color: var(--orange); font-size: 12px; }
+  .detail-list h2 { margin: 0; font-size: var(--type-2xl); }
+  .detail-list p { max-width: 590px; margin: 0; color: var(--muted); font-size: var(--font-size-body-lg); line-height: var(--line-height-body); }
+  .logistics-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+  .logistics-grid > div:first-child { grid-column: 1 / span 6; }
+  .logistics-grid h2 { max-width: 600px; font-size: clamp(var(--font-size-h1), 4.5vw, var(--font-size-display)); line-height: var(--line-height-display); }
+  .logistics-copy { grid-column: 8 / -1; }
+  .logistics-copy p:last-child { color: rgba(243,238,227,.68); }
+  .apartment-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; align-items: center; }
+  .apartment-image { grid-column: 1 / span 5; position: relative; overflow: hidden; aspect-ratio: 4/5; }
+  .apartment-image img { width: 100%; height: 100%; object-fit: cover; }
+  .apartment-copy { grid-column: 7 / -1; }
+  .apartment-copy h2 { font-size: clamp(var(--font-size-h1), 4.5vw, var(--font-size-display)); line-height: var(--line-height-display); }
+  .apartment-copy .arrow-link { margin-top: 24px; }
+  .textiles ul { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0; padding: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); list-style: none; }
+  .textiles li { min-height: 120px; padding: 22px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: var(--font-size-lead); line-height: var(--line-height-body); }
+  @media (max-width: 760px) {
+    .detail-list article { grid-template-columns: 42px 1fr; }
+    .detail-list p { grid-column: 2; }
+    .logistics-grid, .apartment-grid { grid-template-columns: 1fr; }
+    .logistics-grid > div:first-child, .logistics-copy, .apartment-image, .apartment-copy { grid-column: 1; }
+    .logistics-copy, .apartment-copy { margin-top: var(--space-6); }
+    .apartment-image { aspect-ratio: 1/1; }
+    .textiles ul { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
