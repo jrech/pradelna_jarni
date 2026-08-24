@@ -4,10 +4,10 @@ const { eyebrow, title, text } = Astro.props;
 ---
 <section class="page-hero">
   <div class="shell">
-    <p class="eyebrow" data-reveal>{eyebrow}</p>
+    <p class="eyebrow" data-reveal data-reveal-down>{eyebrow}</p>
     <div class="page-hero-grid">
-      <h1 class="display" data-reveal data-reveal-delay="0.08">{title}</h1>
-      <p class="page-hero-copy" data-reveal data-reveal-delay="0.16">{text}</p>
+      <h1 class="display" data-reveal data-reveal-down data-reveal-delay="0.1">{title}</h1>
+      <p class="page-hero-copy" data-reveal data-reveal-down data-reveal-delay="0.17">{text}</p>
     </div>
   </div>
 </section>
