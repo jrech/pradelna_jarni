@@ -126,7 +126,7 @@ if (!reducedMotion) {
   // Keep first-viewport content in its final state. Elements below the fold
   // can safely start hidden before their inView callback runs.
   const prepareRevealElement = (element) => {
-    if (isInViewport(element)) return;
+    if (isInViewport(element) && !element.hasAttribute('data-reveal-initial')) return;
     if (element.matches('[data-image-reveal]')) {
       element.style.clipPath = 'inset(0 0 100% 0)';
       return;

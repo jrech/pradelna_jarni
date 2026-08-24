@@ -20,7 +20,7 @@ const groups = [
   <section class="pricing section">
     <div class="shell price-groups">
       {groups.map((group, groupIndex) => (
-        <section class="price-group" data-reveal>
+        <section class="price-group" data-reveal data-reveal-initial={groupIndex === 0 ? true : undefined}>
           <div class="price-heading"><span>0{groupIndex + 1}</span><h2>{group.title}</h2></div>
           <dl>{group.items.map(([name, price]) => <div><dt>{name}</dt><dd>{price}</dd></div>)}</dl>
         </section>
