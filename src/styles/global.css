@@ -184,7 +184,7 @@ h4 { font-size: var(--font-size-h4); line-height: 1.2; letter-spacing: -.01em; }
 
 .brand:focus-visible .brand-leaf { opacity: 1; }
 
-.site-header { position: sticky; z-index: 1000; top: 0; isolation: isolate; background: var(--warm-white); }
+.site-header { position: sticky; z-index: 1000; top: 0; isolation: isolate; border-bottom: 1px solid color-mix(in srgb, var(--ink), transparent 90%); background: var(--warm-white); }
 .header-inner { display: flex; min-height: var(--header-height); align-items: center; justify-content: space-between; padding-block: 12px; }
 html.motion-ready [data-header-reveal] { opacity: 0; transform: translateY(-12px); }
 .brand { position: relative; z-index: 3; display: block; width: 83px; }
