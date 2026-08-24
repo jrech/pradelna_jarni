@@ -14,6 +14,8 @@
   --radius: 4px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --motion-reveal-duration: 420ms;
+  --motion-image-duration: 720ms;
   /* Major Third type scale — 16px base, ratio 1.25 */
   --type-xs: 12px;
   --type-sm: 14px;
@@ -184,6 +186,7 @@ h4 { font-size: var(--font-size-h4); line-height: 1.2; letter-spacing: -.01em; }
 
 .site-header { position: sticky; z-index: 1000; top: 0; isolation: isolate; background: var(--warm-white); }
 .header-inner { display: flex; min-height: var(--header-height); align-items: center; justify-content: space-between; padding-block: 12px; }
+html.motion-ready [data-header-reveal] { opacity: 0; transform: translateY(-12px); }
 .brand { position: relative; z-index: 3; display: block; width: 83px; }
 .brand-logo { position: relative; z-index: 0; width: 83px; height: auto; transition: opacity 250ms var(--ease-out); }
 .brand-logo-cream { position: absolute; inset: 0; opacity: 0; }
@@ -394,6 +397,6 @@ h4 { font-size: var(--font-size-h4); line-height: 1.2; letter-spacing: -.01em; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
-  .button, .arrow-link, .site-nav ul a, .footer-main a, .footer-legal a, .brand-logo, .brand-leaf, .menu-toggle *, .mobile-menu, .mobile-menu *, .service-card p, .llm-contact a, input, textarea { transition-duration: .01ms !important; }
+  *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
+  .mobile-menu, .mobile-menu *, .menu-icon svg { transition: none !important; }
 }

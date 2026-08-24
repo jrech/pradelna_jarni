@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Stránka nenalezena | Prádelna Jarní" description="Požadovaná stránka nebyla nalezena." path="/404">
+  <section class="not-found shell"><p class="eyebrow">404</p><h1 class="display">Tahle stránka se zatoulala.</h1><p>Požadovanou stránku se nepodařilo najít. Vraťte se na úvod nebo pokračujte na služby a kontakt.</p><div class="not-found-links"><a class="button button-primary" href="/">Na úvod</a><a class="arrow-link" href="/kontakt">Kontakt</a></div></section>
+</BaseLayout>
+<style>
+  .not-found { min-height: 60vh; padding-block: var(--section-large); }
+  .not-found h1 { max-width: 760px; margin-bottom: var(--space-6); }
+  .not-found p:not(.eyebrow) { max-width: 540px; margin-bottom: var(--space-8); font-size: var(--type-lg); }
+  .not-found-links { display: flex; align-items: center; gap: var(--space-6); }
+</style>

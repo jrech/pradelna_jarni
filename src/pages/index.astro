@@ -154,12 +154,12 @@ const values = [
       <div class="about-top">
         <div class="about-title">
           <h2 data-reveal data-reveal-delay="0">Prádelna, na kterou se můžete spolehnout.</h2>
-          <a class="button button-primary" data-reveal data-reveal-delay="0.28" href="/kontakt#poptavka">Nezávazná poptávka</a>
+          <a class="button button-primary" data-reveal data-reveal-delay="0.16" href="/kontakt#poptavka">Nezávazná poptávka</a>
         </div>
         <div class="about-copy">
-          <h3 data-reveal data-reveal-delay="0.14">Čisté prádlo je základ. Stejně důležité je, aby bylo připravené ve chvíli, kdy ho potřebujete.</h3>
-          <p data-reveal data-reveal-delay="0.42">Proto se domluvíme na režimu, který vám vyhovuje — od pravidelného svozu až po doručení čistého prádla zpět. Když se něco změní, řešíte to přímo s námi.</p>
-          <div class="about-trust" data-reveal data-reveal-delay="0.56"><Check size={14} stroke-width={2} aria-hidden="true" /><span>Možnost využít náhradní plnění</span></div>
+          <h3 data-reveal data-reveal-delay="0.08">Čisté prádlo je základ. Stejně důležité je, aby bylo připravené ve chvíli, kdy ho potřebujete.</h3>
+          <p data-reveal data-reveal-delay="0.24">Proto se domluvíme na režimu, který vám vyhovuje — od pravidelného svozu až po doručení čistého prádla zpět. Když se něco změní, řešíte to přímo s námi.</p>
+          <div class="about-trust" data-reveal data-reveal-delay="0.32"><Check size={14} stroke-width={2} aria-hidden="true" /><span>Možnost využít náhradní plnění</span></div>
         </div>
       </div>
       <div class="about-image" data-image-reveal>
@@ -172,10 +172,10 @@ const values = [
     <div class="shell faq-grid">
       <div><p class="eyebrow" data-reveal>Časté otázky</p><h2 data-reveal data-reveal-delay="0.08">Než se domluvíme.</h2></div>
       <div class="faq-list">
-        <details data-reveal data-reveal-stagger data-reveal-delay="0"><summary>Musím se vázat dlouhodobou smlouvou?<span>+</span></summary><p>Ne. Spolupráci lze domluvit i bez dlouhodobé smlouvy a vyzkoušet si, zda vám nastavený režim vyhovuje. U pravidelné spolupráce lze řešit výhodnější podmínky a kapacitu.</p></details>
-        <details data-reveal data-reveal-stagger data-reveal-delay="0.08"><summary>Jak funguje svoz a rozvoz?<span>+</span></summary><p>Režim svozu nastavíme podle typu provozu, objemu a vašich potřeb. Konkrétní dny a četnost jsou součástí domluvy.</p></details>
-        <details data-reveal data-reveal-stagger data-reveal-delay="0.16"><summary>Jak se stanovuje cena?<span>+</span></summary><p>Ceník je orientační. Výsledná cena se může odvíjet od sortimentu, množství, pravidelnosti a logistiky.</p></details>
-        <details data-reveal data-reveal-stagger data-reveal-delay="0.24"><summary>Lze využít náhradní plnění?<span>+</span></summary><p>Ano, náhradní plnění lze uplatnit na všechny naše služby. Konkrétní podmínky probereme při poptávce.</p></details>
+        <details data-reveal data-reveal-stagger><summary>Musím se vázat dlouhodobou smlouvou?<span>+</span></summary><p>Ne. Spolupráci lze domluvit i bez dlouhodobé smlouvy a vyzkoušet si, zda vám nastavený režim vyhovuje. U pravidelné spolupráce lze řešit výhodnější podmínky a kapacitu.</p></details>
+        <details data-reveal data-reveal-stagger><summary>Jak funguje svoz a rozvoz?<span>+</span></summary><p>Režim svozu nastavíme podle typu provozu, objemu a vašich potřeb. Konkrétní dny a četnost jsou součástí domluvy.</p></details>
+        <details data-reveal data-reveal-stagger><summary>Jak se stanovuje cena?<span>+</span></summary><p>Ceník je orientační. Výsledná cena se může odvíjet od sortimentu, množství, pravidelnosti a logistiky.</p></details>
+        <details data-reveal data-reveal-stagger><summary>Lze využít náhradní plnění?<span>+</span></summary><p>Ano, náhradní plnění lze uplatnit na všechny naše služby. Konkrétní podmínky probereme při poptávce.</p></details>
       </div>
     </div>
   </section>
@@ -197,48 +197,11 @@ const values = [
   .hero-image { position: relative; overflow: hidden; aspect-ratio: 1.777; }
   .hero-image img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
 
-  @media (prefers-reduced-motion: no-preference) {
-    [data-hero-image] {
-      animation: hero-image-reveal 760ms var(--ease-out) both;
-    }
-
-    [data-hero-image] img {
-      animation: hero-image-settle 900ms var(--ease-out) both;
-    }
-
-    [data-hero-title] {
-      animation: hero-copy-reveal 520ms var(--ease-out) 100ms both;
-    }
-
-    [data-hero-intro-copy] {
-      animation: hero-copy-reveal 460ms var(--ease-out) 170ms both;
-    }
-
-    [data-hero-intro-link] {
-      animation: hero-copy-reveal 400ms var(--ease-out) 225ms both;
-    }
-  }
-
-  @keyframes hero-image-reveal {
-    from { clip-path: inset(0 0 100% 0 round var(--radius)); }
-    to { clip-path: inset(0 0 0 0 round var(--radius)); }
-  }
-
-  @keyframes hero-image-settle {
-    from { transform: scale(1.025); }
-    to { transform: scale(1); }
-  }
-
-  @keyframes hero-copy-reveal {
-    from {
-      opacity: 0;
-      transform: translateY(-16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  :global(html.motion-ready) [data-hero-image] { clip-path: inset(0 0 100% 0 round var(--radius)); }
+  :global(html.motion-ready) [data-hero-image] img { transform: scale(1.025); }
+  :global(html.motion-ready) [data-hero-title],
+  :global(html.motion-ready) [data-hero-intro-copy],
+  :global(html.motion-ready) [data-hero-intro-link] { opacity: 0; transform: translateY(-16px); }
   .audience { height: 165svh; color: var(--cream); background: var(--ink); }
   .audience-sticky { position: sticky; top: var(--header-height); display: flex; height: calc(100svh - var(--header-height)); align-items: center; overflow: hidden; }
   .audience-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-6); align-items: start; }

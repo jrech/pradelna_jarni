@@ -3,13 +3,59 @@ import { animate, inView } from 'motion';
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const MOTION = {
   easeOut: [0.23, 1, 0.32, 1],
-  imageEase: [0.77, 0, 0.175, 1],
   revealDuration: 0.42,
   revealMargin: '0px 0px -15% 0px',
   imageDuration: 0.72,
   imageMargin: '0px 0px -12% 0px',
   stagger: 0.05,
 };
+
+if (!reducedMotion) {
+  const headerReveal = document.querySelector('[data-header-reveal]');
+  if (headerReveal) {
+    animate(headerReveal, {
+      opacity: [0, 1],
+      transform: ['translateY(-12px)', 'translateY(0)'],
+    }, {
+      duration: MOTION.revealDuration,
+      easing: MOTION.easeOut,
+    });
+  }
+
+  const heroImage = document.querySelector('[data-hero-image]');
+  const heroImageElement = heroImage?.querySelector('img');
+  const heroTitle = document.querySelector('[data-hero-title]');
+  const heroIntroCopy = document.querySelector('[data-hero-intro-copy]');
+  const heroIntroLink = document.querySelector('[data-hero-intro-link]');
+
+  if (heroImage) {
+    animate(heroImage, {
+      clipPath: ['inset(0 0 100% 0 round 4px)', 'inset(0 0 0 0 round 4px)'],
+    }, {
+      duration: MOTION.imageDuration,
+      easing: MOTION.easeOut,
+    });
+  }
+
+  if (heroImageElement) {
+    animate(heroImageElement, { transform: ['scale(1.025)', 'scale(1)'] }, {
+      duration: MOTION.imageDuration,
+      easing: MOTION.easeOut,
+    });
+  }
+
+  [[heroTitle, 0.1], [heroIntroCopy, 0.17], [heroIntroLink, 0.225]].forEach(([element, delay]) => {
+    if (!element) return;
+    animate(element, {
+      opacity: [0, 1],
+      transform: ['translateY(-16px)', 'translateY(0)'],
+    }, {
+      duration: MOTION.revealDuration,
+      delay,
+      easing: MOTION.easeOut,
+    });
+  });
+}
 const menuToggle = document.querySelector('[data-menu-toggle]');
 const menu = document.querySelector('[data-menu]');
 
@@ -116,10 +162,10 @@ if (!reducedMotion) {
     if (isInViewport(element) && element.style.clipPath === '') return;
     animate(element, { clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'] }, {
       duration: MOTION.imageDuration,
-      easing: MOTION.imageEase,
+      easing: MOTION.easeOut,
     });
     const image = element.querySelector('img');
-    if (image) animate(image, { transform: ['scale(1.025)', 'scale(1)'] }, { duration: 0.8, easing: MOTION.easeOut });
+    if (image) animate(image, { transform: ['scale(1.025)', 'scale(1)'] }, { duration: MOTION.imageDuration, easing: MOTION.easeOut });
   }, { margin: MOTION.imageMargin });
 }
 

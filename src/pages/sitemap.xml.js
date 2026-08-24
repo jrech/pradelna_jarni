@@ -3,7 +3,7 @@ const pages = ['', 'sluzby', 'cenik', 'kontakt', 'llm-info', 'ochrana-osobnich-u
 export function GET({ site }) {
   const base = site ?? new URL('https://www.pradelnajarni.cz');
   const urls = pages
-    .map((page) => `<url><loc>${new URL(page, base).href}</loc></url>`)
+    .map((page) => `<url><loc>${new URL(page || '/', base).href}</loc></url>`)
     .join('');
 
   return new Response(
