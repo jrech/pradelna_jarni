@@ -14,51 +14,86 @@ const menuToggle = document.querySelector('[data-menu-toggle]');
 const menu = document.querySelector('[data-menu]');
 
 if (menuToggle && menu) {
+  const mobileMenuQuery = window.matchMedia('(max-width: 960px)');
+  const menuLabel = menuToggle.querySelector('.menu-label');
+
+  const setMenuState = (open, { restoreFocus = false } = {}) => {
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+    if (menuLabel) menuLabel.textContent = open ? 'Zavřít' : 'Menu';
+    menu.toggleAttribute('data-open', open);
+    document.body.classList.toggle('menu-open', open);
+
+    if (mobileMenuQuery.matches) {
+      menu.inert = !open;
+      menu.setAttribute('aria-hidden', String(!open));
+    } else {
+      menu.inert = false;
+      menu.removeAttribute('aria-hidden');
+    }
+
+    if (!open && restoreFocus) menuToggle.focus();
+  };
+
+  setMenuState(false);
+
   menuToggle.addEventListener('click', () => {
-    const open = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!open));
-    menu.toggleAttribute('data-open', !open);
-    document.body.classList.toggle('menu-open', !open);
+    setMenuState(menuToggle.getAttribute('aria-expanded') !== 'true');
   });
 
   menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-    menuToggle.setAttribute('aria-expanded', 'false');
-    menu.removeAttribute('data-open');
-    document.body.classList.remove('menu-open');
+    setMenuState(false);
   }));
+
+  document.addEventListener('keydown', (event) => {
+    if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setMenuState(false, { restoreFocus: true });
+      return;
+    }
+
+    if (event.key !== 'Tab') return;
+    const focusable = [menuToggle, ...menu.querySelectorAll('a[href], button:not([disabled])')];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  mobileMenuQuery.addEventListener('change', () => setMenuState(false));
 }
 
 if (!reducedMotion) {
-  document.documentElement.classList.add('motion-ready');
+  const isInViewport = (element) => {
+    const rect = element.getBoundingClientRect();
+    return rect.bottom > 0 && rect.top < window.innerHeight;
+  };
 
-  const heroImage = document.querySelector('[data-hero-image]');
-  const heroTitle = document.querySelector('[data-hero-title]');
-  const heroIntroCopy = document.querySelector('[data-hero-intro-copy]');
-  const heroIntroLink = document.querySelector('[data-hero-intro-link]');
+  // Keep first-viewport content in its final state. Elements below the fold
+  // can safely start hidden before their inView callback runs.
+  const prepareRevealElement = (element) => {
+    if (isInViewport(element)) return;
+    if (element.matches('[data-image-reveal]')) {
+      element.style.clipPath = 'inset(0 0 100% 0)';
+      return;
+    }
+    const revealFrom = element.hasAttribute('data-reveal-down') ? '-14px' : '14px';
+    element.style.opacity = '0';
+    element.style.transform = `translateY(${revealFrom})`;
+  };
 
-  if (heroImage && heroTitle && heroIntroCopy && heroIntroLink) {
-    animate(heroImage, { opacity: [0, 1], clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'] }, {
-      duration: MOTION.imageDuration,
-      easing: MOTION.imageEase,
-    });
-    animate(heroTitle, { opacity: [0, 1], transform: ['translateY(-24px)', 'translateY(0)'] }, {
-      delay: 0.2,
-      duration: 0.42,
-      easing: MOTION.easeOut,
-    });
-    animate(heroIntroCopy, { opacity: [0, 1], transform: ['translateY(-18px)', 'translateY(0)'] }, {
-      delay: 0.4,
-      duration: 0.36,
-      easing: MOTION.easeOut,
-    });
-    animate(heroIntroLink, { opacity: [0, 1], transform: ['translateY(-18px)', 'translateY(0)'] }, {
-      delay: 0.6,
-      duration: 0.3,
-      easing: MOTION.easeOut,
-    });
-  }
+  document.querySelectorAll('[data-reveal], [data-image-reveal]').forEach(prepareRevealElement);
 
   const revealElement = (element) => {
+    if (isInViewport(element) && element.style.opacity === '') return;
     const staggered = element.hasAttribute('data-reveal-stagger');
     const revealFrom = element.hasAttribute('data-reveal-down') ? '-14px' : '14px';
     const customDelay = Number.parseFloat(element.getAttribute('data-reveal-delay') || '0');
@@ -78,6 +113,7 @@ if (!reducedMotion) {
   inView('[data-reveal-early]', revealElement, { margin: '0px 0px -5% 0px' });
 
   inView('[data-image-reveal]', (element) => {
+    if (isInViewport(element) && element.style.clipPath === '') return;
     animate(element, { clipPath: ['inset(0 0 100% 0)', 'inset(0 0 0% 0)'] }, {
       duration: MOTION.imageDuration,
       easing: MOTION.imageEase,
